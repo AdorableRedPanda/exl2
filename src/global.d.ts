@@ -15,4 +15,9 @@ declare global {
 		amount: number;
 		date: DateISO;
 	}
+
+	interface TransactionsGroup {
+		key: string;
+		data: Transaction[];
+	}
 }
