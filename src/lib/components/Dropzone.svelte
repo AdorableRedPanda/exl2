@@ -1,59 +1,51 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { UploadCloud, Ban, Cloud } from '@lucide/svelte/icons';
+	import { isFilesDragged, isValidFiles, noop } from '../utils';
+	import { UploadCloud, Ban } from '@lucide/svelte/icons';
+	type DropState = 'no_files' | 'dragging' | 'error' | 'loading';
 
 	export let onDrop: (files: File[]) => void;
 
-	export let status: 'error' | 'no_file' | 'dragging' | 'loading' = 'no_file';
-	const extensions = ['application/json'];
+	export let state: DropState;
+	export let extensions: string[] = [];
 
-	function handleDragEnter(event) {
-		event.preventDefault();
-		const files = [...event.dataTransfer.items];
+	function handleDragEnter(event: DragEvent) {
+		if (!isFilesDragged(event.dataTransfer)) {
+			return;
+		}
 
-		const valid =
-			files.length &&
-			files.every((f) => extensions.includes(f.type)) &&
-			files.every((f) => f.kind === 'file');
-
-		status = valid ? 'dragging' : 'error';
-	}
-
-	function handleDragOver(event) {
-		event.preventDefault();
+		const valid = isValidFiles(extensions, event.dataTransfer);
+		state = valid ? 'dragging' : 'error';
 	}
 
 	function handleDragLeave(event) {
-		event.preventDefault();
 		if (event.currentTarget.contains(event.relatedTarget)) {
 			return;
 		}
-		status = 'no_file';
+		state = 'no_files';
 	}
 
 	function handleDrop(event) {
-		event.preventDefault();
-
-		if (status !== 'error') {
-			onDrop(...event.dataTransfer.items);
+		if (state === 'error') {
+			return;
 		}
 
-		status = 'no_file';
+		onDrop([...event.dataTransfer.files]);
 	}
 </script>
 
 <div
 	role="application"
 	aria-label="File drop zone"
-	on:dragenter={handleDragEnter}
-	on:dragover={handleDragOver}
-	on:dragleave={handleDragLeave}
-	on:drop={handleDrop}
+	on:dragenter|preventDefault={handleDragEnter}
+	on:dragover|preventDefault={noop}
+	on:dragleave|preventDefault={handleDragLeave}
+	on:drop|preventDefault={handleDrop}
 	class="w-full h-full"
 >
 	<slot />
 
-	{#if status === 'loading'}
+	{#if state === 'loading'}
 		<div class="overlay bg-slate-600/70" transition:fade>
 			<div class="message text-white">
 				<UploadCloud class="h-20 w-20 duration-400 animate-caret-blink" />
@@ -62,7 +54,7 @@
 		</div>
 	{/if}
 
-	{#if status === 'dragging'}
+	{#if state === 'dragging'}
 		<div class="overlay bg-slate-600/70" transition:fade>
 			<div class="message text-white">
 				<UploadCloud class="h-20 w-20" />
@@ -71,11 +63,12 @@
 		</div>
 	{/if}
 
-	{#if status === 'error'}
+	{#if state === 'error'}
 		<div class="overlay bg-red-900/60" transition:fade>
 			<div class="message text-white">
 				<Ban class="h-20 w-20" />
-				Invalid file type
+				Invalid file type. <br />
+				Supported types: {extensions.join(', ')}
 			</div>
 		</div>
 	{/if}

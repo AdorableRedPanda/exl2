@@ -7,12 +7,10 @@ import { CTX_NAME } from './constants';
 
 export const setActionsCtx = (store: Writable<Transaction[]>) => {
 	const add = async (t: TransactionData) => {
-		const id = newId();
-		const transaction = { ...t, id };
-		await db.add(transaction)
+		await db.add({ ...t, id: newId() });
 		const data = await db.getAll();
 
-		store.set(data)
+		store.set(data);
 	};
 
 	const _delete = (id: ID) => db.delete(id).then(() => store.update(filterOther(id)));
@@ -20,5 +18,13 @@ export const setActionsCtx = (store: Writable<Transaction[]>) => {
 	const update = (t: TransactionData, id: ID) =>
 		db.update({ ...t, id }).then(() => store.update(updateTxn(id, t)));
 
-	setContext<TransactionsActions>(CTX_NAME, { add, delete: _delete, update });
+	const addMany = async (payload: TransactionData[]) => {
+		const items = payload.map((t) => ({ ...t, id: newId() }));
+		await db.addMany(items);
+		const data = await db.getAll();
+
+		store.set(data);
+	};
+
+	setContext<TransactionsActions>(CTX_NAME, { addMany, add, delete: _delete, update });
 };
