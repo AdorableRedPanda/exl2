@@ -6,10 +6,13 @@ import { filterOther, updateTxn } from '@/utils';
 import { CTX_NAME } from './constants';
 
 export const setActionsCtx = (store: Writable<Transaction[]>) => {
-	const add = (t: TransactionData) => {
+	const add = async (t: TransactionData) => {
 		const id = newId();
 		const transaction = { ...t, id };
-		db.add(transaction).then((res) => store.update((ts) => [...ts, res]));
+		await db.add(transaction)
+		const data = await db.getAll();
+
+		store.set(data)
 	};
 
 	const _delete = (id: ID) => db.delete(id).then(() => store.update(filterOther(id)));

@@ -9,10 +9,9 @@
 	const onDrop = (files: File[]) => {
 		const file = files[0];
 	};
-
 </script>
 
-<Dropzone onDrop={(f) =>console.log(f)}>
+<Dropzone onDrop={(f) => console.log(f)}>
 	<main class="h-full w-full grid grid-cols-[360px_1fr] overflow-hidden">
 		<TransactionsList transactions={$store} />
 		<MonthsChart transactions={$store} />

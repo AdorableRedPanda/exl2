@@ -1,1 +1,1 @@
-export const takeMonthString = (d: DateISO) => d.slice(0, 7);
+export const takeMonthString = (d: DateString) => d.slice(0, 7);

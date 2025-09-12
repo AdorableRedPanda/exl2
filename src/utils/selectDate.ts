@@ -1,1 +1,1 @@
-export const selectDate = (d: DateISO) => d.slice(0, 10);
+export const selectDate = (d: DateString) => d.slice(0, 10);

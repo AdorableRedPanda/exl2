@@ -2,7 +2,7 @@ export {};
 
 declare global {
 	type ID = string;
-	type DateISO = string;
+	type DateString = string;
 	type TransactionType = 'income' | 'expense';
 
 	interface Transaction extends TransactionData {
@@ -13,7 +13,7 @@ declare global {
 		type: TransactionType;
 		comment: string;
 		amount: number;
-		date: DateISO;
+		date: DateString;
 	}
 
 	interface TransactionsGroup {

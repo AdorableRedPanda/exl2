@@ -1,7 +1,7 @@
 import { stringifyDate } from '@/utils';
 
 export const buildTxnData = (data: Partial<TransactionData>): TransactionData => ({
-	type: 'income',
+	type: 'expense',
 	comment: '',
 	amount: 0,
 	date: stringifyDate(new Date()),

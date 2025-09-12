@@ -5,4 +5,4 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
 	hour12: false
 });
 
-export const getDateLabel = (s: DateISO) => formatter.format(new Date(s));
+export const getDateLabel = (s: DateString) => formatter.format(new Date(s));
