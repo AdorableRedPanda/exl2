@@ -1,5 +1,12 @@
 import { stringifyDate } from './stringifyDate';
 
+const buildType = (type: string, amount: number): TransactionType => {
+	if (type === 'income' || type === 'expense') {
+		return type;
+	}
+	return amount >= 0 ? 'income' : 'expense';
+};
+
 export const buildTxnData = (item: any): TransactionData[] => {
 	if (typeof item !== 'object' || item === null) {
 		return [];
@@ -17,10 +24,12 @@ export const buildTxnData = (item: any): TransactionData[] => {
 
 	const comment = item.comment || '';
 
+	const type = buildType(item.type || '', amount);
+
 	const data: TransactionData = {
 		date: stringifyDate(date),
 		amount: Math.abs(amount),
-		type: amount >= 0 ? 'income' : 'expense',
+		type,
 		comment
 	};
 

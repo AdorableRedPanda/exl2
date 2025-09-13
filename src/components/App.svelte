@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { MonthsChart, TransactionsList } from './index';
+	import { MonthsChart } from './MonthsChart';
 	import { initStore, setActionsCtx } from '@/store';
 	import TransactionsUpload from './TransactionsUpload.svelte';
+	import TransactionsList from './TransactionsList.svelte';
 
 	const store = initStore();
 	setActionsCtx(store);

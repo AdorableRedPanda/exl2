@@ -1,24 +1,19 @@
 <script lang="ts">
-	import Dropzone from '$lib/components/Dropzone.svelte';
+	import Dropzone, { type DropState } from '$lib/components/Dropzone.svelte';
 	import { useActionsCtx } from '@/store';
 	import { parseTxnsFile } from '@/utils';
 	const actions = useActionsCtx();
 
 	let state: DropState = 'no_files';
 
-	const handleFile = (file: File) => {};
+	const handleFile = (f: File) => parseTxnsFile(f).then(actions.addMany).catch(console.error);
 
 	const onDrop = (files: File[]) => {
 		state = 'loading';
 
-		const file = files[0];
-
-		parseTxnsFile(file)
-			.then(console.log)
-			.catch(console.error)
-			.finally(() => {
-				state = 'no_files';
-			});
+		Promise.all(files.map(handleFile)).finally(() => {
+			state = 'no_files';
+		});
 	};
 </script>
 

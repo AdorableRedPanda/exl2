@@ -1,9 +1,10 @@
 <script lang="ts">
-	import DayItem from './DayItem.svelte';
 	import { buildGroups, getDayKey } from '@/utils';
-	import { ListHeader } from '@/components';
 
+	import DayItem from './DayItem.svelte';
+	import ListHeader from './ListHeader.svelte';
 	import NewTransaction from './NewTransaction.svelte';
+	import TransactionItem from '@/components/TransactionItem.svelte';
 
 	export let transactions: Transaction[] = [];
 
@@ -18,9 +19,9 @@
 	<ListHeader />
 	<NewTransaction />
 	<ul class="list-none w-full overflow-auto flex flex-col">
-		{#each days as d}
+		{#each transactions as transaction}
 			<li class="contents">
-				<DayItem {d} {onEdit} />
+				<TransactionItem {transaction} />
 			</li>
 		{/each}
 	</ul>
