@@ -1,28 +1,13 @@
-<script lang="ts">
-	import { buildGroups, getDayKey } from '@/utils';
-
-	import DayItem from './DayItem.svelte';
-	import ListHeader from './ListHeader.svelte';
-	import NewTransaction from './NewTransaction.svelte';
-	import TransactionItem from '@/components/TransactionItem.svelte';
-
-	export let transactions: Transaction[] = [];
-
-	$: days = buildGroups(getDayKey, transactions);
-
-	const onEdit = (t: Transaction) => {
-		console.log('edit', t);
-	};
+<script>
+	import GroupItem from '@/components/GroupItem.svelte';
+	import { selectMonthGroups } from '@/store/selectors';
+	const months = selectMonthGroups();
 </script>
 
-<div class="overflow-hidden grid grid-rows-[auto_auto_1fr] border-r-2">
-	<ListHeader />
-	<NewTransaction />
-	<ul class="list-none w-full overflow-auto flex flex-col">
-		{#each transactions as transaction}
-			<li class="contents">
-				<TransactionItem {transaction} />
-			</li>
-		{/each}
-	</ul>
-</div>
+<ul class="list-none scrollbar-thin w-full h-fit overflow-auto flex flex-col">
+	{#each $months as month}
+		<li class="contents">
+			<GroupItem group={month} />
+		</li>
+	{/each}
+</ul>

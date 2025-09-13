@@ -11,7 +11,7 @@
 	</div>
 
 	<ul class="list-none w-full flex flex-col">
-		{#each d.data as t}
+		{#each d.transactions as t}
 			<li>
 				<TxnItem transaction={t} />
 			</li>

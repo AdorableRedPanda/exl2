@@ -10,6 +10,7 @@
 	},
 	"devDependencies": {
 		"@types/d3-scale": "4.0.9",
+		"@types/d3-shape": "3.1.7",
 		"d3-scale": "4.0.2",
 		"@internationalized/date": "3.9.0",
 		"@lucide/svelte": "0.515.0",

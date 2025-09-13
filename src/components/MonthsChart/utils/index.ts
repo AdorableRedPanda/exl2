@@ -1,1 +1,0 @@
-export { buildMonthsBars } from './buildMonthsBars';

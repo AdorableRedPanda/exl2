@@ -18,6 +18,17 @@ declare global {
 
 	interface TransactionsGroup {
 		key: string;
-		data: Transaction[];
+		transactions: Transaction[];
+	}
+
+	interface TransactionsSummary {
+		income: number;
+		expense: number;
+		diff: number;
+	}
+
+	interface GroupSummary {
+		key: string;
+		summary: TransactionsSummary;
 	}
 }

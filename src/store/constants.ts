@@ -1,1 +1,2 @@
-export const CTX_NAME = 'transactions_context';
+export const LIST_ACTIONS = 'list_actions';
+export const LIST_STATE = 'list_state';

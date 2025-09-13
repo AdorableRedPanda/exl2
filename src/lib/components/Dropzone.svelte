@@ -1,15 +1,27 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { isFilesDragged, isValidFiles, noop } from '../utils';
 	import { UploadCloud, Ban } from '@lucide/svelte/icons';
-	export type DropState = 'no_files' | 'dragging' | 'error' | 'loading';
+	type DropState = 'no_files' | 'dragging' | 'error' | 'loading';
 
-	export let onDrop: (files: File[]) => void;
+	export let onDrop: (files: File[]) => Promise<void>;
 
-	export let state: DropState;
 	export let extensions: string[] = [];
 
+	let dragCounter = 0;
+	let state: DropState;
+
+	const reset = () => {
+		dragCounter = 0;
+		state = 'no_files';
+	};
+
 	function handleDragEnter(event: DragEvent) {
+		dragCounter++;
+		if (dragCounter > 1) {
+			return;
+		}
+
 		const data = event.dataTransfer;
 		if (!data || !isFilesDragged(data)) {
 			return;
@@ -20,7 +32,12 @@
 	}
 
 	function handleDragLeave() {
-		state = 'no_files';
+		dragCounter--;
+		if (dragCounter > 0) {
+			return;
+		}
+
+		reset()
 	}
 
 	function handleDrop(event: DragEvent) {
@@ -28,7 +45,13 @@
 			return;
 		}
 
-		onDrop(Array.from(event.dataTransfer?.files || []));
+		const files = Array.from(event.dataTransfer?.files || []);
+
+		state = 'loading';
+
+		onDrop(files)
+				.catch(console.error)
+				.finally(reset);
 	}
 </script>
 

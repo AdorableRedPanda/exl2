@@ -36,7 +36,10 @@
 	{/if}
 
 	{#if !opened}
-		<button class="bg-slate-800 text-white cursor-pointer w-full text-base" on:click={open}>
+		<button
+			class="bg-slate-800 text-white cursor-pointer w-full text-base"
+			on:click={open}
+		>
 			create new
 		</button>
 	{/if}

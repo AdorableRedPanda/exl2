@@ -7,3 +7,5 @@ export { getDateLabel } from './getDateLabel';
 export { getTimeLabel } from './getTimeLabel';
 export { txnFromForm } from './txnFromForm';
 export { parseTxnsFile } from './parseTxnsFile';
+export { buildMonthGroups } from './buildMonthGroups';
+export { buildSummary } from './buildSummary';

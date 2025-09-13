@@ -4,7 +4,10 @@
 	export let transaction: Transaction;
 
 	const isIncome = transaction.type === 'income';
-	const amountCls = cn('font-semibold', isIncome ? 'text-green-900' : 'text-red-900');
+	const amountCls = cn(
+		'font-semibold',
+		isIncome ? 'text-green-900' : 'text-red-900'
+	);
 	const amountLabel = `${isIncome ? '+' : '-'}${transaction.amount}€`;
 	const timeLabel = getTimeLabel(transaction.date);
 </script>

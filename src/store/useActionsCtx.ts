@@ -1,5 +1,6 @@
 import { getContext } from 'svelte';
 import type { TransactionsActions } from './types';
-import { CTX_NAME } from './constants';
+import { LIST_ACTIONS } from './constants';
 
-export const useActionsCtx = () => getContext<TransactionsActions>(CTX_NAME);
+export const useActionsCtx = () =>
+	getContext<TransactionsActions>(LIST_ACTIONS);

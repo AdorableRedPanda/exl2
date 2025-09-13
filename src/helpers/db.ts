@@ -77,7 +77,9 @@ export async function deleteTx(id: ID): Promise<void> {
 	});
 }
 
-export async function addMany(transactions: Transaction[]): Promise<Transaction[]> {
+export async function addMany(
+	transactions: Transaction[]
+): Promise<Transaction[]> {
 	const database = await openDB();
 
 	return new Promise((resolve, reject) => {

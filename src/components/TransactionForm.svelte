@@ -40,7 +40,13 @@
 			/>
 		</Labeled>
 		<Labeled htmlFor="date" label="Date">
-			<Input type="datetime-local" id="date" name="date" value={initial.date} required />
+			<Input
+				type="datetime-local"
+				id="date"
+				name="date"
+				value={initial.date}
+				required
+			/>
 		</Labeled>
 	</div>
 	<Labeled htmlFor="comment" label="Comment">

@@ -11,11 +11,15 @@
 		<RadioGroup bind:value id="type" name="type" class="flex gap-4 text-sm">
 			<div class="flex items-center">
 				<RadioGroupItem value="expense" id="rg-expense" />
-				<Label class="p-2 cursor-pointer text-base" for="rg-expense">expense</Label>
+				<Label class="p-2 cursor-pointer text-base" for="rg-expense"
+					>expense</Label
+				>
 			</div>
 			<div class="flex items-center">
 				<RadioGroupItem value="income" id="rg-income" />
-				<Label class="p-2 cursor-pointer text-base" for="rg-income">income</Label>
+				<Label class="p-2 cursor-pointer text-base" for="rg-income"
+					>income</Label
+				>
 			</div>
 		</RadioGroup>
 	</div>
