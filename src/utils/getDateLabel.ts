@@ -1,8 +1,7 @@
-const formatter = new Intl.DateTimeFormat('en-GB', {
-	day: '2-digit',
-	month: 'short',
-	year: '2-digit',
-	hour12: false
-});
-
-export const getDateLabel = (s: DateString) => formatter.format(new Date(s));
+export const getDateLabel = (d: DateString) =>
+	new Date(d).toLocaleDateString('en-GB', {
+		month: 'short',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric'
+	});

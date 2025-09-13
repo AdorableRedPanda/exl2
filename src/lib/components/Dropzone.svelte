@@ -37,7 +37,7 @@
 			return;
 		}
 
-		reset()
+		reset();
 	}
 
 	function handleDrop(event: DragEvent) {
@@ -49,9 +49,7 @@
 
 		state = 'loading';
 
-		onDrop(files)
-				.catch(console.error)
-				.finally(reset);
+		onDrop(files).catch(console.error).finally(reset);
 	}
 </script>
 

@@ -2,7 +2,7 @@
 	import { useInitCtx } from '@/store';
 	import TransactionsUpload from './TransactionsUpload.svelte';
 	import Transactions from './Transactions.svelte';
-	import {Areas, Bars2} from './charts';
+	import { Areas, Bars2 } from './charts';
 
 	useInitCtx();
 </script>

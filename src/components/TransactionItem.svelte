@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getTimeLabel } from '@/utils';
+	import { getDateLabel } from '@/utils';
 	import { cn } from '$lib/utils';
 	export let t: Transaction;
 
@@ -9,10 +9,10 @@
 		isIncome ? 'text-green-900' : 'text-red-900'
 	);
 	const amountLabel = `${isIncome ? '+' : '-'}${t.amount}€`;
-	const timeLabel = getTimeLabel(t.date);
+	const timeLabel = getDateLabel(t.date);
 </script>
 
-<div class="group bg-background py-1 pl-3">
+<div class="bg-background py-1 px-3">
 	<div class="text-sm">
 		<div class="flex justify-between pr-2 items-center w-full">
 			<span class="flex-1">{timeLabel}</span>

@@ -7,7 +7,7 @@ const buildType = (type: string, amount: number): TransactionType => {
 	return amount >= 0 ? 'income' : 'expense';
 };
 
-export const buildTxnData = (item: any): TransactionData[] => {
+export const txnFromAny = (item: any): TransactionData[] => {
 	if (typeof item !== 'object' || item === null) {
 		return [];
 	}

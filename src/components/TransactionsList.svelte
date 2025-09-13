@@ -5,7 +5,7 @@
 </script>
 
 <ul class="list-none scrollbar-thin w-full h-fit overflow-auto flex flex-col">
-	{#each $months as month}
+	{#each $months as month (month.key)}
 		<li class="contents">
 			<GroupItem group={month} />
 		</li>

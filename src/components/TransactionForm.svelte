@@ -16,8 +16,6 @@
 		}
 
 		onSubmit(txnFromForm(form));
-
-		form.reset();
 	};
 </script>
 

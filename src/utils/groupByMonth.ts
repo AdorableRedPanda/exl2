@@ -1,4 +1,4 @@
-import { buildMonthLabel } from '@/utils/buildMonthLabel';
+import { buildMonthKey } from './buildMonthKey';
 
 export const groupByMonth = (arr: Transaction[]) =>
-	Object.groupBy(arr, (t) => buildMonthLabel(t.date));
+	Object.groupBy(arr, (t) => buildMonthKey(t.date));

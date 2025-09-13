@@ -7,7 +7,7 @@
 
 	let opened = false;
 	const actions = useActionsCtx();
-	const initial = buildTxnData({});
+	let initial = buildTxnData({});
 
 	const open = () => {
 		opened = true;
@@ -19,7 +19,7 @@
 
 	const onSubmit = (data: TransactionData) => {
 		actions.add(data);
-		close();
+		initial = buildTxnData({});
 	};
 </script>
 

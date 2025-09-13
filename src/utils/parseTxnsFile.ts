@@ -1,4 +1,4 @@
-import { buildTxnData } from '@/utils/buildTxnData';
+import { txnFromAny } from './txnFromAny';
 
 export const parseTxnsFile = async (file: File) => {
 	const text = await file.text();
@@ -8,5 +8,5 @@ export const parseTxnsFile = async (file: File) => {
 		throw new Error('Invalid file format: expected an array of transactions');
 	}
 
-	return json.flatMap(buildTxnData);
+	return json.flatMap(txnFromAny);
 };

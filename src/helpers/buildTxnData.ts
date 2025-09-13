@@ -6,6 +6,6 @@ export const buildTxnData = (
 	type: 'expense',
 	comment: '',
 	amount: 0,
-	date: stringifyDate(new Date()),
+	date: stringifyDate(new Date(Date.now())),
 	...data
 });

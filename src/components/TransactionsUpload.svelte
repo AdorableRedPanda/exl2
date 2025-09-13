@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Dropzone from '$lib/components/Dropzone.svelte';
-	import { useFilesUpload } from '@/store';
+	import { useTransactionsFiles } from '@/store';
 
-	const onDrop = useFilesUpload();
+	const { upload } = useTransactionsFiles();
 </script>
 
-<Dropzone extensions={['application/json']} {onDrop}>
+<Dropzone extensions={['application/json']} onDrop={upload}>
 	<slot />
 </Dropzone>

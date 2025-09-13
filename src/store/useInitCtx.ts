@@ -1,11 +1,9 @@
 import { writable } from 'svelte/store';
 import { onMount, setContext } from 'svelte';
-import { DbClient, DbClient as db, newId } from '@/helpers';
+import { DbClient, DbClient as db } from '@/helpers';
 import type { StoreCtx, TransactionsActions } from './types';
-import { filterOther, updateTxn } from '@/utils';
+import { filterOther, updateTxn, buildTxn } from '@/utils';
 import { LIST_ACTIONS, LIST_STATE } from './constants';
-
-const buildTxn = (d: TransactionData) => ({ ...d, id: newId() });
 
 export const useInitCtx = () => {
 	const store = writable<Transaction[]>([]);
@@ -13,7 +11,8 @@ export const useInitCtx = () => {
 	onMount(async () => DbClient.getAll().then((res) => store.set(res)));
 
 	const add = async (t: TransactionData) => {
-		await db.add(buildTxn(t));
+		const transaction = buildTxn(t);
+		await db.add(transaction);
 		await db.getAll().then(store.set);
 	};
 
